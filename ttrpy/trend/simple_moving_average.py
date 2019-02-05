@@ -1,3 +1,6 @@
+# Author: joelowj
+# License: Apache License, Version 2.0
+
 import pandas as pd
 
 def simple_moving_average(df, asset_price, sma, n):
@@ -5,6 +8,8 @@ def simple_moving_average(df, asset_price, sma, n):
     Simple Moving Average (SMA) is an arithmetic moving average calculated by
     adding recent closing prices then dividing that by the number of time periods
     in the calculation average.
+
+    SMA = (P_1 + ... + P_n) / n
 
     Parameters:
         df (pd.DataFrame): DataFrame which contain the asset price.
