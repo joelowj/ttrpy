@@ -3,6 +3,7 @@
 
 import pandas as pd
 
+
 def ema(df, price, ema, n):
     """
     Exponential Moving Average (EMA) is a Weighted Moving Average (WMA) that
@@ -24,8 +25,7 @@ def ema(df, price, ema, n):
 
     """
 
-    series = pd.concat([df[:n][price].rolling(window=n).mean(),
-                            df[n:][price]])
+    series = pd.concat([df[:n][price].rolling(window=n).mean(), df[n:][price]])
     df[ema] = series.ewm(span=n, adjust=False).mean()
 
     return df

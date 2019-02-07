@@ -3,6 +3,7 @@
 
 import pandas as pd
 
+
 def wma(df, price, wma, n):
     """
     The Weighted Moving Average calculates a weight for each value in the series.
@@ -27,7 +28,6 @@ def wma(df, price, wma, n):
     def wa(x):
         return sum([(i + 1) * p for i, p in enumerate(x)]) / (n * (n + 1) / 2)
 
-    df[wma] = df[price].rolling(window=n) \
-                       .apply(lambda x: wa(x), raw=True)
+    df[wma] = df[price].rolling(window=n).apply(lambda x: wa(x), raw=True)
 
     return df

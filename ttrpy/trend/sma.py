@@ -3,6 +3,7 @@
 
 import pandas as pd
 
+
 def sma(df, price, sma, n):
     """
     Simple Moving Average (SMA) is an arithmetic moving average calculated by
