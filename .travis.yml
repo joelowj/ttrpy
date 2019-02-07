@@ -16,6 +16,7 @@ install:
 
 script:
   - python -m ttrpy.tests.test_trends -v
+  - python -m ttrpy.tests.test_momentums -v
 
 branches:
   only:
