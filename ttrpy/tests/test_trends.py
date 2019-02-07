@@ -7,7 +7,6 @@ import unittest
 from ttrpy.trend.sma import sma
 from ttrpy.trend.ema import ema
 from ttrpy.trend.wma import wma
-from ttrpy.trend.macd import macd
 
 class TestTrendIndicators(unittest.TestCase):
 
