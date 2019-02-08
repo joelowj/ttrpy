@@ -1,9 +1,7 @@
 # Author: joelowj
 # License: Apache License, Version 2.0
 
-import numpy as np
 import pandas as pd
-import time
 
 
 def rsi(df, price, rsi, n):
@@ -32,6 +30,7 @@ def rsi(df, price, rsi, n):
         df (pd.DataFrame): Dataframe with rsi of the asset calculated.
 
     """
+
     df["diff"] = df[price].diff()
     df.loc[1:, "up"] = df[1:].loc[df["diff"] > 0, "diff"]
     df.loc[1:, "dn"] = -df[1:].loc[df["diff"] < 0, "diff"]

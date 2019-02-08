@@ -14,11 +14,6 @@ class TestMomentumIndicators(unittest.TestCase):
             .sort_values(by="timestamp")
             .reset_index(drop=True)
         )
-        self.ddf = (
-            pd.read_csv("examples/daily_MSFT.csv")
-            .sort_values(by="timestamp")
-            .reset_index(drop=True)
-        )
 
     def test_relative_strength_index(self):
         self.wdf = rsi(self.wdf, "open", "rsi", 10)

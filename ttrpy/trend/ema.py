@@ -24,6 +24,8 @@ def ema(df, price, ema, n):
         df (pd.DataFrame): Dataframe with n-day exponential moving average of the asset calculated.
 
     """
+
+    df = df.copy()
     series = pd.concat([df[:n][price].rolling(window=n).mean(), df[n:][price]])
     df[ema] = series.ewm(span=n, adjust=False).mean()
 
