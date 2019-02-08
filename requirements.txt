@@ -1,7 +1,6 @@
 appdirs==1.4.3
 aspy.yaml==1.1.2
 attrs==18.2.0
-black==18.9b0
 cfgv==1.4.0
 Click==7.0
 identify==1.2.1

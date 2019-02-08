@@ -32,19 +32,15 @@ def rsi(df, price, rsi, n):
         df (pd.DataFrame): Dataframe with rsi of the asset calculated.
 
     """
-
     df["diff"] = df[price].diff()
     df.loc[1:, "up"] = df[1:].loc[df["diff"] > 0, "diff"]
     df.loc[1:, "dn"] = -df[1:].loc[df["diff"] < 0, "diff"]
-
     prev_avg_gain = df[: n + 1].loc[df["diff"] > 0, "diff"].sum() / n
     prev_avg_loss = -df[: n + 1].loc[df["diff"] < 0, "diff"].sum() / n
-
     df.loc[n, "avg_gain"] = prev_avg_gain
     df.loc[n, "avg_loss"] = prev_avg_loss
     df = df.drop(df.index[:n]).reset_index(drop=True)
     df = df.fillna(0)
-
     avg_gains, avg_losses = [0.0], [0.0]
     for row in df.loc[1:, ["up", "dn"]].itertuples(index=False):
         avg_gains.append((prev_avg_gain * (n - 1) + row[0]) / n)
@@ -52,9 +48,7 @@ def rsi(df, price, rsi, n):
         prev_avg_gain, prev_avg_loss = avg_gains[-1], avg_losses[-1]
     df["avg_gain"] += avg_gains
     df["avg_loss"] += avg_losses
-
     df["rsi"] = 100 * df["avg_gain"] / (df["avg_gain"] + df["avg_loss"])
-
     del df["diff"], df["up"], df["dn"], df["avg_gain"], df["avg_loss"]
 
     return df
