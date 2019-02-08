@@ -3,6 +3,7 @@
 
 import numpy as np
 import pandas as pd
+import time
 
 
 def rsi(df, price, rsi, n):
@@ -33,33 +34,25 @@ def rsi(df, price, rsi, n):
     """
 
     df["diff"] = df[price].diff()
-    df = df.drop(df.index[0]).reset_index(drop=True)
-    df["up"] = df.loc[df["diff"] > 0, "diff"]
-    df["dn"] = -df.loc[df["diff"] < 0, "diff"]
+    df.loc[1:, "up"] = df[1:].loc[df["diff"] > 0, "diff"]
+    df.loc[1:, "dn"] = -df[1:].loc[df["diff"] < 0, "diff"]
+
+    prev_avg_gain = df[: n + 1].loc[df["diff"] > 0, "diff"].sum() / n
+    prev_avg_loss = -df[: n + 1].loc[df["diff"] < 0, "diff"].sum() / n
+
+    df.loc[n, "avg_gain"] = prev_avg_gain
+    df.loc[n, "avg_loss"] = prev_avg_loss
+    df = df.drop(df.index[:n]).reset_index(drop=True)
     df = df.fillna(0)
 
-    df.loc[n - 1, "avg_gain"] = df[:n].loc[df["diff"] > 0, "diff"].sum() / n
-    df.loc[n - 1, "avg_loss"] = -df[:n].loc[df["diff"] < 0, "diff"].sum() / n
-    df = df.drop(df.index[: n - 1]).reset_index(drop=True)
+    avg_gains, avg_losses = [0.0], [0.0]
+    for row in df.loc[1:, ["up", "dn"]].itertuples(index=False):
+        avg_gains.append((prev_avg_gain * (n - 1) + row[0]) / n)
+        avg_losses.append((prev_avg_loss * (n - 1) + row[1]) / n)
+        prev_avg_gain, prev_avg_loss = avg_gains[-1], avg_losses[-1]
+    df["avg_gain"] += avg_gains
+    df["avg_loss"] += avg_losses
 
-    flag = True
-    prev_avg_gain = df.loc[0, "avg_gain"]
-    prev_avg_loss = df.loc[0, "avg_loss"]
-
-    def calculate_avg(x):
-        nonlocal flag, prev_avg_gain, prev_avg_loss
-        if flag:
-            flag = False
-            return pd.Series({"avg_gain": avg_gain, "avg_loss": avg_loss})
-        avg_gain = (prev_avg_gain * (n - 1) + x["up"]) / n
-        avg_loss = (prev_avg_loss * (n - 1) + x["dn"]) / n
-        prev_avg_gain = avg_gain
-        prev_avg_loss = avg_loss
-        return pd.Series({"avg_gain": avg_gain, "avg_loss": avg_loss})
-
-    df.loc[1:, ["avg_gain", "avg_loss"]] = df.loc[1:, ["up", "dn"]].apply(
-        lambda x: calculate_avg(x), axis=1
-    )
     df["rsi"] = 100 * df["avg_gain"] / (df["avg_gain"] + df["avg_loss"])
 
     del df["diff"], df["up"], df["dn"], df["avg_gain"], df["avg_loss"]
