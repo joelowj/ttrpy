@@ -15,8 +15,8 @@ install:
   - pip install -r requirements.txt
 
 script:
-  - python -m ttrpy.tests.test_trends -v
-  - python -m ttrpy.tests.test_momentums -v
+  - python -m tests.test_trends -v
+  - python -m tests.test_momentums -v
 
 branches:
   only:
