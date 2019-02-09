@@ -17,6 +17,7 @@ install:
 script:
   - python -m tests.test_trends -v
   - python -m tests.test_momentums -v
+  - python -m tests.test_volumes -v
 
 branches:
   only:
