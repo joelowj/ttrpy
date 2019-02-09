@@ -6,6 +6,7 @@ import unittest
 
 from ttrpy.momentum.rsi import rsi
 from ttrpy.momentum.stoch import stoch
+from ttrpy.momentum.obv import obv
 
 
 class TestMomentumIndicators(unittest.TestCase):
@@ -55,6 +56,16 @@ class TestMomentumIndicators(unittest.TestCase):
         self.assertAlmostEqual(self.wdf["slow_%d"][1090], 69.0426, places=4)
         self.assertAlmostEqual(self.wdf["slow_%k"][1091], 67.5139, places=4)
         self.assertAlmostEqual(self.wdf["slow_%d"][1091], 68.2783, places=4)
+
+    def test_on_balance_volume(self):
+        self.wdf = obv(self.wdf, "close", "volume", "obv")
+        self.assertEqual(len(self.wdf["obv"]), 1101)
+        self.assertAlmostEqual(self.wdf["obv"][0], 46857300.0, places=4)
+        self.assertAlmostEqual(self.wdf["obv"][1], 87317200.0, places=4)
+        self.assertAlmostEqual(self.wdf["obv"][2], 133939000.0, places=4)
+        self.assertAlmostEqual(self.wdf["obv"][1097], 81836686.0000, places=4)
+        self.assertAlmostEqual(self.wdf["obv"][1098], -30791892.0, places=4)
+        self.assertAlmostEqual(self.wdf["obv"][1099], -232403105.0, places=4)
 
     def tearDown(self):
         self.ddf = None
