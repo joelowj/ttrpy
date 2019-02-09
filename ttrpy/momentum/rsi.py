@@ -48,6 +48,6 @@ def rsi(df, price, rsi, n):
     df["avg_gain"] += avg_gains
     df["avg_loss"] += avg_losses
     df["rsi"] = 100 * df["avg_gain"] / (df["avg_gain"] + df["avg_loss"])
-    del df["diff"], df["up"], df["dn"], df["avg_gain"], df["avg_loss"]
+    df.drop(["diff", "up", "dn", "avg_gain", "avg_loss"], axis=1, inplace=True)
 
     return df

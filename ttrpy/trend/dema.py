@@ -30,6 +30,6 @@ def dema(df, price, dema, n):
     df = ema(df[n - 1 :], dema + "_ema", dema + "_ema_2", n)
     df[dema] = 2 * df[dema + "_ema"] - df[dema + "_ema_2"]
     df = df.dropna().reset_index(drop=True)
-    del df[dema + "_ema"], df[dema + "_ema_2"]
+    df.drop([dema + "_ema", dema + "_ema_2"], axis=1, inplace=True)
 
     return df

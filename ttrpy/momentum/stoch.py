@@ -71,6 +71,8 @@ def stoch(
         df[slow_k_n - 1 :], "slow_%k", "slow_%d", slow_d_n
     )
     df = df.dropna().reset_index(drop=True)
-    del df["highest_" + high], df["lowest_" + low], df["fast_%k"]
+    df.drop(
+        ["highest_" + high, "lowest_" + low, "fast_%k"], axis=1, inplace=True
+    )
 
     return df

@@ -29,5 +29,6 @@ def obv(df, price, volume, obv):
     df.loc[df["diff"] == 0, obv + "_sign"] = 0
     df["volume_sign"] = df[volume] * df[obv + "_sign"]
     df[obv] = df["volume_sign"].cumsum()
+    df.drop(["diff", obv + "_sign", "volume_sign"], axis=1, inplace=True)
 
     return df

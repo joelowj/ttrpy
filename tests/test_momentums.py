@@ -6,6 +6,7 @@ import unittest
 
 from ttrpy.momentum.rsi import rsi
 from ttrpy.momentum.stoch import stoch
+from ttrpy.momentum.mfi import mfi
 
 
 class TestMomentumIndicators(unittest.TestCase):
@@ -55,6 +56,16 @@ class TestMomentumIndicators(unittest.TestCase):
         self.assertAlmostEqual(self.wdf["slow_%d"][1090], 69.0426, places=4)
         self.assertAlmostEqual(self.wdf["slow_%k"][1091], 67.5139, places=4)
         self.assertAlmostEqual(self.wdf["slow_%d"][1091], 68.2783, places=4)
+
+    def test_money_flow_index(self):
+        self.wdf = mfi(self.wdf, "high", "low", "close", "volume", "mfi", 10)
+        self.assertEqual(len(self.wdf["mfi"]), 1091)
+        self.assertAlmostEqual(self.wdf["mfi"][0], 51.3815, places=4)
+        self.assertAlmostEqual(self.wdf["mfi"][1], 52.2354, places=4)
+        self.assertAlmostEqual(self.wdf["mfi"][2], 50.4667, places=4)
+        self.assertAlmostEqual(self.wdf["mfi"][1087], 34.1296, places=4)
+        self.assertAlmostEqual(self.wdf["mfi"][1088], 41.8414, places=4)
+        self.assertAlmostEqual(self.wdf["mfi"][1089], 40.6965, places=4)
 
     def tearDown(self):
         self.ddf = None
