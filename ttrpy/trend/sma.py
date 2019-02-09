@@ -22,7 +22,7 @@ def sma(df, price, sma, n):
         df (pd.DataFrame): Dataframe with n-day moving average of the asset calculated.
 
     """
-
+    df = df.copy()
     df[sma] = df[price].rolling(window=n).mean()
 
     return df

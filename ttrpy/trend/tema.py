@@ -34,5 +34,6 @@ def tema(df, price, tema, n):
         3 * df[tema + "_ema"] - 3 * df[tema + "_ema_2"] + df[tema + "_ema_3"]
     )
     df = df.dropna().reset_index(drop=True)
+    del df[tema + "_ema"], df[tema + "_ema_2"], df[tema + "_ema_3"]
 
     return df
