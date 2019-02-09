@@ -22,6 +22,15 @@ def stoch(
     slow_d_ma_type=0,
 ):
     """
+    The Stochastic Oscillator is another well-known momentum indicator used in
+    technical analysis. The idea behind this indicator is that the closing
+    prices should predominantly close in the same direction as the prevailing
+    trend.
+
+    In an upward trend the price should be closing near the highs of the trading
+    range and in a downward trend the price should be closing near the lows of
+    the trading range. When this occurs it signals continued momentum and
+    strength in the direction of the prevailing trend.
 
     Fast Stochastic Oscillator:
         Fast %K = %K basic calculation
@@ -30,6 +39,19 @@ def stoch(
         Slow %K =  Fast %K smoothed with n period moving average
         Slow %D = n-period moving average of Slow %K
 
+    Parameters:
+        df (pd.DataFrame): DataFrame which contain the asset information.
+        high (string): the column name for the period highest price  of the asset.
+        low (string): the column name for the period lowest price of the asset.
+        close (string): the column name for the closing price of the asset.
+        fast_k_n (int): the time period of the fast k moving average.
+        slow_k_n (int): the time period of the slow k moving average.
+        slow_d_n (int): the time period of the slow d moving average.
+        slow_k_ma_type (int): moving average type for the slow k moving average.
+        slow_d_ma_type (int): Moving average type for the slow d moving average.
+
+    Returns:
+        df (pd.DataFrame): Dataframe with slow %k and slow %d of the asset calculated.
 
     """
 
