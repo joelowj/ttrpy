@@ -6,6 +6,7 @@ import unittest
 
 from ttrpy.momentum.rsi import rsi
 from ttrpy.momentum.stoch import stoch
+from ttrpy.momentum.stochf import stochf
 from ttrpy.momentum.mfi import mfi
 
 
@@ -67,6 +68,48 @@ class TestMomentumIndicators(unittest.TestCase):
 
         self.assertAlmostEqual(self.wdf["slow_%k"][1091], 67.5139, places=4)
         self.assertAlmostEqual(self.wdf["slow_%d"][1091], 68.2783, places=4)
+
+    def test_stochastic_oscillator_fast_0(self):
+        self.wdf = stochf(self.wdf, "high", "low", "close", 5, 3, 0)
+
+        self.assertAlmostEqual(self.wdf["fast_%k"][0], 81.0821, places=4)
+        self.assertAlmostEqual(self.wdf["fast_%d"][0], 90.7020, places=4)
+
+        self.assertAlmostEqual(self.wdf["fast_%k"][1], 6.6675, places=4)
+        self.assertAlmostEqual(self.wdf["fast_%d"][1], 60.1922, places=4)
+
+        self.assertAlmostEqual(self.wdf["fast_%k"][2], 4.3311, places=4)
+        self.assertAlmostEqual(self.wdf["fast_%d"][2], 30.6936, places=4)
+
+        self.assertAlmostEqual(self.wdf["fast_%k"][1091], 98.6370, places=4)
+        self.assertAlmostEqual(self.wdf["fast_%d"][1091], 63.5539, places=4)
+
+        self.assertAlmostEqual(self.wdf["fast_%k"][1092], 94.7633, places=4)
+        self.assertAlmostEqual(self.wdf["fast_%d"][1092], 81.4897, places=4)
+
+        self.assertAlmostEqual(self.wdf["fast_%k"][1093], 52.1495, places=4)
+        self.assertAlmostEqual(self.wdf["fast_%d"][1093], 81.8499, places=4)
+
+    def test_stochastic_oscillator_fast_1(self):
+        self.wdf = stochf(self.wdf, "high", "low", "close", 5, 3, 1)
+
+        self.assertAlmostEqual(self.wdf["fast_%k"][0], 81.0821, places=4)
+        self.assertAlmostEqual(self.wdf["fast_%d"][0], 90.7020, places=4)
+
+        self.assertAlmostEqual(self.wdf["fast_%k"][1], 6.6675, places=4)
+        self.assertAlmostEqual(self.wdf["fast_%d"][1], 48.6847, places=4)
+
+        self.assertAlmostEqual(self.wdf["fast_%k"][2], 4.3311, places=4)
+        self.assertAlmostEqual(self.wdf["fast_%d"][2], 26.5079, places=4)
+
+        self.assertAlmostEqual(self.wdf["fast_%k"][1091], 98.6370, places=4)
+        self.assertAlmostEqual(self.wdf["fast_%d"][1091], 70.9933, places=4)
+
+        self.assertAlmostEqual(self.wdf["fast_%k"][1092], 94.7633, places=4)
+        self.assertAlmostEqual(self.wdf["fast_%d"][1092], 82.8783, places=4)
+
+        self.assertAlmostEqual(self.wdf["fast_%k"][1093], 52.1495, places=4)
+        self.assertAlmostEqual(self.wdf["fast_%d"][1093], 67.5139, places=4)
 
     def test_money_flow_index(self):
         self.wdf = mfi(self.wdf, "high", "low", "close", "volume", "mfi", 10)
