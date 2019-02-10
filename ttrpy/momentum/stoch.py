@@ -2,7 +2,6 @@
 # License: Apache License, Version 2.0
 
 import pandas as pd
-
 from ttrpy.trend.sma import sma
 from ttrpy.trend.ema import ema
 from ttrpy.trend.wma import wma
@@ -55,7 +54,7 @@ def stoch(
 
     """
 
-    ma_type = {0: sma, 1: ema, 2: wma, 3: dema, 4: tema}
+    ma_types = {0: sma, 1: ema, 2: wma, 3: dema, 4: tema}
 
     df["highest_" + high] = df[high].rolling(window=fast_k_n).max()
     df["lowest_" + low] = df[low].rolling(window=fast_k_n).min()
@@ -64,10 +63,10 @@ def stoch(
         / (df["highest_" + high] - df["lowest_" + low])
         * 100
     )
-    df = ma_type[slow_k_ma_type](
+    df = ma_types[slow_k_ma_type](
         df[fast_k_n - 1 :], "fast_%k", "slow_%k", slow_k_n
     )
-    df = ma_type[slow_d_ma_type](
+    df = ma_types[slow_d_ma_type](
         df[slow_k_n - 1 :], "slow_%k", "slow_%d", slow_d_n
     )
     df = df.dropna().reset_index(drop=True)
