@@ -8,6 +8,7 @@ from ttrpy.momentum.rsi import rsi
 from ttrpy.momentum.stoch import stoch
 from ttrpy.momentum.stochf import stochf
 from ttrpy.momentum.mfi import mfi
+from ttrpy.momentum.ppo import ppo
 
 
 class TestMomentumIndicators(unittest.TestCase):
@@ -120,6 +121,16 @@ class TestMomentumIndicators(unittest.TestCase):
         self.assertAlmostEqual(self.wdf["mfi"][1087], 34.1296, places=4)
         self.assertAlmostEqual(self.wdf["mfi"][1088], 41.8414, places=4)
         self.assertAlmostEqual(self.wdf["mfi"][1089], 40.6965, places=4)
+
+    def test_percentage_price_oscillator_0(self):
+        self.wdf = ppo(self.wdf, "close", "ppo", 10, 26, 0)
+        self.assertEqual(len(self.wdf["ppo"]), 1076)
+        self.assertAlmostEqual(self.wdf["ppo"][0], -12.6661, places=4)
+        self.assertAlmostEqual(self.wdf["ppo"][1], -9.9556, places=4)
+        self.assertAlmostEqual(self.wdf["ppo"][2], -6.2630, places=4)
+        self.assertAlmostEqual(self.wdf["ppo"][1072], -3.0579, places=4)
+        self.assertAlmostEqual(self.wdf["ppo"][1073], -3.1442, places=4)
+        self.assertAlmostEqual(self.wdf["ppo"][1074], -2.9889, places=4)
 
     def tearDown(self):
         self.ddf = None
