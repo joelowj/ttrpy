@@ -1,1 +1,5 @@
 theme: jekyll-theme-minimal
+url: "https://joelowj.github.io/ttrpy/"
+baseurl: "/ttrpy"
+title: Technical Trading Rules Python
+description: ttrpy is a Python package that provides popular technical analysis function for financial time series data.
