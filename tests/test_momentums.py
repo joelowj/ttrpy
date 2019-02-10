@@ -9,6 +9,7 @@ from ttrpy.momentum.stoch import stoch
 from ttrpy.momentum.stochf import stochf
 from ttrpy.momentum.mfi import mfi
 from ttrpy.momentum.ppo import ppo
+from ttrpy.momentum.mom import mom
 
 
 class TestMomentumIndicators(unittest.TestCase):
@@ -131,6 +132,16 @@ class TestMomentumIndicators(unittest.TestCase):
         self.assertAlmostEqual(self.wdf["ppo"][1072], -3.0579, places=4)
         self.assertAlmostEqual(self.wdf["ppo"][1073], -3.1442, places=4)
         self.assertAlmostEqual(self.wdf["ppo"][1074], -2.9889, places=4)
+
+    def test_momentum(self):
+        self.wdf = mom(self.wdf, "close", "mom", 10)
+        self.assertEqual(len(self.wdf["mom"]), 1091)
+        self.assertAlmostEqual(self.wdf["mom"][0], -45.1900, places=4)
+        self.assertAlmostEqual(self.wdf["mom"][1], -47.4400, places=4)
+        self.assertAlmostEqual(self.wdf["mom"][2], -45.2500, places=4)
+        self.assertAlmostEqual(self.wdf["mom"][1087], -1.8600, places=4)
+        self.assertAlmostEqual(self.wdf["mom"][1088], -1.1200, places=4)
+        self.assertAlmostEqual(self.wdf["mom"][1089], -0.2900, places=4)
 
     def tearDown(self):
         self.ddf = None
