@@ -12,6 +12,7 @@ from ttrpy.momentum.apo import apo
 from ttrpy.momentum.ppo import ppo
 from ttrpy.momentum.mom import mom
 from ttrpy.momentum.roc import roc
+from ttrpy.momentum.rocr import rocr
 
 
 class TestMomentumIndicators(unittest.TestCase):
@@ -164,6 +165,16 @@ class TestMomentumIndicators(unittest.TestCase):
         self.assertAlmostEqual(self.wdf["roc"][1087], -1.6975, places=4)
         self.assertAlmostEqual(self.wdf["roc"][1088], -1.0343, places=4)
         self.assertAlmostEqual(self.wdf["roc"][1089], -0.2814, places=4)
+
+    def test_rate_of_change_ratio(self):
+        self.wdf = rocr(self.wdf, "close", "rocr", 10)
+        self.assertEqual(len(self.wdf["rocr"]), 1091)
+        self.assertAlmostEqual(self.wdf["rocr"][0], 0.6442, places=4)
+        self.assertAlmostEqual(self.wdf["rocr"][1], 0.6492, places=4)
+        self.assertAlmostEqual(self.wdf["rocr"][2], 0.6727, places=4)
+        self.assertAlmostEqual(self.wdf["rocr"][1087], 0.9830, places=4)
+        self.assertAlmostEqual(self.wdf["rocr"][1088], 0.9897, places=4)
+        self.assertAlmostEqual(self.wdf["rocr"][1089], 0.9972, places=4)
 
     def tearDown(self):
         self.ddf = None
