@@ -8,6 +8,7 @@ from ttrpy.momentum.rsi import rsi
 from ttrpy.momentum.stoch import stoch
 from ttrpy.momentum.stochf import stochf
 from ttrpy.momentum.mfi import mfi
+from ttrpy.momentum.apo import apo
 from ttrpy.momentum.ppo import ppo
 from ttrpy.momentum.mom import mom
 
@@ -122,6 +123,16 @@ class TestMomentumIndicators(unittest.TestCase):
         self.assertAlmostEqual(self.wdf["mfi"][1087], 34.1296, places=4)
         self.assertAlmostEqual(self.wdf["mfi"][1088], 41.8414, places=4)
         self.assertAlmostEqual(self.wdf["mfi"][1089], 40.6965, places=4)
+
+    def test_absolute_price_oscillator_0(self):
+        self.wdf = apo(self.wdf, "close", "apo", 10, 26, 0)
+        self.assertEqual(len(self.wdf["apo"]), 1076)
+        self.assertAlmostEqual(self.wdf["apo"][0], -13.2494, places=4)
+        self.assertAlmostEqual(self.wdf["apo"][1], -10.3612, places=4)
+        self.assertAlmostEqual(self.wdf["apo"][2], -6.4765, places=4)
+        self.assertAlmostEqual(self.wdf["apo"][1072], -3.2936, places=4)
+        self.assertAlmostEqual(self.wdf["apo"][1073], -3.3860, places=4)
+        self.assertAlmostEqual(self.wdf["apo"][1074], -3.2127, places=4)
 
     def test_percentage_price_oscillator_0(self):
         self.wdf = ppo(self.wdf, "close", "ppo", 10, 26, 0)
