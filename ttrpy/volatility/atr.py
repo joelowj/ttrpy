@@ -3,6 +3,7 @@
 
 import pandas as pd
 from ttrpy.trend.ema import ema
+from ttrpy.util.tr import tr
 
 
 def atr(df, high, low, close, atr, n):
@@ -25,11 +26,7 @@ def atr(df, high, low, close, atr, n):
 
     """
 
-    df["previous_close"] = df[close].shift(1)
-    df["h-l"] = df[high] - df[low]
-    df["h-pc"] = df[high] - df["previous_close"]
-    df["pc-l"] = df["previous_close"] - df[low]
-    df["true_range"] = df[["h-l", "h-pc", "pc-l"]].max(axis=1)
+    df = tr(df, high, low, close, "true_range")
     prev_atr = df.loc[1:n, "true_range"].sum() / n
     df.loc[n, atr] = prev_atr
     df = df.drop(df.index[:n]).reset_index(drop=True)
