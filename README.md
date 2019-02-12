@@ -1,20 +1,21 @@
 # ttrpy
 
-ttrpy is a Python package that provides popular technical analysis function for
-financial time series data.
+[![Build Status](https://travis-ci.com/joelowj/ttrpy.svg?token=zM8uDnAP2GXz8Hagm4hw&branch=master)](https://travis-ci.com/joelowj/ttrpy)
 
-Indicators represent a statistical approach to technical analysis. By looking at
-money flow, trends, volatility, and momentum, they provide a secondary measure
-to actual price movements and help confirm the quality of chart patterns or form
-buy or sell signals
+Technical Trading Rule Python is an open source library for popular technical analysis function for financial time series data.
 
 # Installation
 
-## Dependencies
+To install the current release:
 
-## User installation
-
+```
+pip install ttrpy
+```
 
 # Getting Started
 
-# Contributing
+# Contribution Guidelines
+
+**If you want to contribute to ttrpy, be sure to review the [contribution
+guidelines](CONTRIBUTING.md). This project adheres to ttrpy's
+[code of conduct](CODE_OF_CONDUCT.md). By participating, you are expected to uphold this code.**
