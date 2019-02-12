@@ -100,7 +100,6 @@ class TestTrendIndicators(unittest.TestCase):
         self.assertAlmostEqual(self.wdf["bop"][1099], -0.8074, places=4)
 
     def tearDown(self):
-        self.ddf = None
         self.wdf = None
 
 

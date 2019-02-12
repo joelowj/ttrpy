@@ -26,7 +26,6 @@ class TestUtilityIndicators(unittest.TestCase):
         self.assertAlmostEqual(self.wdf["tr"][1098], 5.0, places=4)
 
     def tearDown(self):
-        self.ddf = None
         self.wdf = None
 
 

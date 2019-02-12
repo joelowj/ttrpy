@@ -26,7 +26,6 @@ class TestVolumeIndicators(unittest.TestCase):
         self.assertAlmostEqual(self.wdf["obv"][1099], -232403105.0, places=4)
 
     def tearDown(self):
-        self.ddf = None
         self.wdf = None
 
 

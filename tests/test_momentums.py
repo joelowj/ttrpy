@@ -13,6 +13,7 @@ from ttrpy.momentum.ppo import ppo
 from ttrpy.momentum.mom import mom
 from ttrpy.momentum.roc import roc
 from ttrpy.momentum.rocr import rocr
+from ttrpy.momentum.ultosc import ultosc
 
 
 class TestMomentumIndicators(unittest.TestCase):
@@ -176,8 +177,19 @@ class TestMomentumIndicators(unittest.TestCase):
         self.assertAlmostEqual(self.wdf["rocr"][1088], 0.9897, places=4)
         self.assertAlmostEqual(self.wdf["rocr"][1089], 0.9972, places=4)
 
+    def test_ultimate_oscillator(self):
+        self.wdf = ultosc(
+            self.wdf, "high", "low", "close", "ultosc", 8, 14, 28
+        )
+        self.assertEqual(len(self.wdf["ultosc"]), 1073)
+        self.assertAlmostEqual(self.wdf["ultosc"][0], 66.6467, places=4)
+        self.assertAlmostEqual(self.wdf["ultosc"][1], 60.8778, places=4)
+        self.assertAlmostEqual(self.wdf["ultosc"][2], 60.1978, places=4)
+        self.assertAlmostEqual(self.wdf["ultosc"][1069], 53.6636, places=4)
+        self.assertAlmostEqual(self.wdf["ultosc"][1070], 51.0509, places=4)
+        self.assertAlmostEqual(self.wdf["ultosc"][1071], 52.4782, places=4)
+
     def tearDown(self):
-        self.ddf = None
         self.wdf = None
 
 

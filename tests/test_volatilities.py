@@ -166,7 +166,6 @@ class TestVolatilityIndicators(unittest.TestCase):
         )
 
     def tearDown(self):
-        self.ddf = None
         self.wdf = None
 
 
