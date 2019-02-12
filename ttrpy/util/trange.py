@@ -4,7 +4,7 @@
 import pandas as pd
 
 
-def tr(df, high, low, close, tr):
+def trange(df, high, low, close, tr):
     """
     Welles Wilder described these calculations to determine the trading range
     for a stock or commodity. True Range is defined as the largest of the

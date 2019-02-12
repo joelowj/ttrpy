@@ -4,7 +4,7 @@
 import pandas as pd
 import unittest
 
-from ttrpy.util.tr import tr
+from ttrpy.util.trange import trange
 
 
 class TestVolatilityIndicators(unittest.TestCase):
@@ -16,7 +16,7 @@ class TestVolatilityIndicators(unittest.TestCase):
         )
 
     def test_true_range(self):
-        self.wdf = tr(self.wdf, "high", "low", "close", "tr")
+        self.wdf = trange(self.wdf, "high", "low", "close", "tr")
         self.assertEqual(len(self.wdf["tr"]), 1100)
         self.assertAlmostEqual(self.wdf["tr"][0], 11.01, places=4)
         self.assertAlmostEqual(self.wdf["tr"][1], 5.88, places=4)

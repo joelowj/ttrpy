@@ -5,6 +5,7 @@ import pandas as pd
 import unittest
 
 from ttrpy.volatility.atr import atr
+from ttrpy.volatility.natr import natr
 from ttrpy.volatility.bbands import bbands
 
 
@@ -25,6 +26,16 @@ class TestVolatilityIndicators(unittest.TestCase):
         self.assertAlmostEqual(self.wdf["atr"][1083], 6.1786, places=4)
         self.assertAlmostEqual(self.wdf["atr"][1084], 5.9530, places=4)
         self.assertAlmostEqual(self.wdf["atr"][1085], 5.8849, places=4)
+
+    def test_normalized_average_true_range(self):
+        self.wdf = natr(self.wdf, "high", "low", "close", "natr", 14)
+        self.assertEqual(len(self.wdf["natr"]), 1087)
+        self.assertAlmostEqual(self.wdf["natr"][0], 12.8148, places=4)
+        self.assertAlmostEqual(self.wdf["natr"][1], 12.4616, places=4)
+        self.assertAlmostEqual(self.wdf["natr"][2], 12.2235, places=4)
+        self.assertAlmostEqual(self.wdf["natr"][1083], 5.7363, places=4)
+        self.assertAlmostEqual(self.wdf["natr"][1084], 5.5547, places=4)
+        self.assertAlmostEqual(self.wdf["natr"][1085], 5.7257, places=4)
 
     def test_bollinger_bands_0(self):
         self.wdf = bbands(self.wdf, "close", "bbands", 3, 3, 0, 5)
