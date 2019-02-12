@@ -25,6 +25,7 @@ def midpnt(df, price, midpnt, n):
     df[midpnt + "_max"] = df[price].rolling(window=n).max()
     df[midpnt + "_min"] = df[price].rolling(window=n).min()
     df[midpnt] = (df[midpnt + "_max"] + df[midpnt + "_min"]) / 2
+    df.drop([midpnt + "_max", midpnt + "_min"], axis=1, inplace=True)
     df = df.dropna().reset_index(drop=True)
 
     return df
