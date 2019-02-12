@@ -9,6 +9,7 @@ from ttrpy.trend.wma import wma
 from ttrpy.trend.ema import ema
 from ttrpy.trend.dema import dema
 from ttrpy.trend.tema import tema
+from ttrpy.trend.trix import trix
 from ttrpy.trend.bop import bop
 
 
@@ -77,6 +78,16 @@ class TestTrendIndicators(unittest.TestCase):
         self.assertAlmostEqual(self.wdf["tema"][1071], 102.5139, places=4)
         self.assertAlmostEqual(self.wdf["tema"][1072], 103.9007, places=4)
         self.assertAlmostEqual(self.wdf["tema"][1073], 103.3348, places=4)
+
+    def test_triple_smooth_exponential_moving_average(self):
+        self.wdf = trix(self.wdf, "close", "trix", 10)
+        self.assertEqual(len(self.wdf["trix"]), 1073)
+        self.assertAlmostEqual(self.wdf["trix"][0], -0.1181, places=4)
+        self.assertAlmostEqual(self.wdf["trix"][1], 0.1188, places=4)
+        self.assertAlmostEqual(self.wdf["trix"][2], 0.2755, places=4)
+        self.assertAlmostEqual(self.wdf["trix"][1069], -0.2203, places=4)
+        self.assertAlmostEqual(self.wdf["trix"][1070], -0.2046, places=4)
+        self.assertAlmostEqual(self.wdf["trix"][1071], -0.2006, places=4)
 
     def test_balance_of_power(self):
         self.wdf = bop(self.wdf, "open", "high", "low", "close", "bop")
