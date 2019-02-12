@@ -12,7 +12,7 @@ def mom(df, price, mom, n):
         df (pd.DataFrame): DataFrame which contain the asset information.
         price (string): the column name of the price of the asset.
         mom (string): the column name for the rate of change values.
-        n (int):
+        n (int): the total number of periods.
 
     Returns:
         df (pd.DataFrame): Dataframe with mom of the asset calculated.

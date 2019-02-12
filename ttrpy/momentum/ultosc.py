@@ -7,13 +7,37 @@ from ttrpy.util.trange import trange
 
 
 def ultosc(
-    df, high, low, close, ultosc, time_period_1, time_period_2, time_period_3
+    df,
+    high,
+    low,
+    close,
+    ultosc,
+    time_period_1=7,
+    time_period_2=14,
+    time_period_3=28,
 ):
     """
+    The Ultimate Oscillator (ULTOSC) by Larry Williams is a momentum oscillator
+    that incorporates three different time periods to improve the overbought and
+    oversold signals.
+
+    Parameters:
+        df (pd.DataFrame): DataFrame which contain the asset information.
+        high (string): the column name for the period highest price  of the asset.
+        low (string): the column name for the period lowest price of the asset.
+        close (string): the column name for the closing price of the asset.
+        ultosc (string): the column name for the ultimate oscillator values.
+        time_period_1 (int): The first time period for the indicator. By default, 7.
+        time_period_2 (int): The second time period for the indicator. By default, 14.
+        time_period_3 (int): The third time period for the indicator. By default, 28.
+
+    Returns:
+        df (pd.DataFrame): Dataframe with ultimate oscillator of the asset calculated.
+
     """
 
-    df = trange(df, high, low, close, ultosc + "_true_range")
     df[ultosc + "previous_close"] = df[close].shift(1)
+    df = trange(df, high, low, close, ultosc + "_true_range")
     df = df.dropna().reset_index(drop=True)
     df[ultosc + "_true_low"] = df[[low, ultosc + "previous_close"]].min(axis=1)
     df[ultosc + "_close-tl"] = df[close] - df[ultosc + "_true_low"]

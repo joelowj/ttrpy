@@ -18,6 +18,7 @@ def ppo(df, price, ppo, fast_period, slow_period, ma_type):
     Parameters:
         df (pd.DataFrame): DataFrame which contain the asset information.
         price (string): the column name of the price of the asset.
+        ppo (string): the column name for the % price oscillator values.
         fast_period (int): the time period of the fast moving average.
         slow_period (int): the time period of the slow moving average.
         ma_type (int): Moving average type.

@@ -17,6 +17,7 @@ install:
 script:
   - python -m tests.test_momentums -v
   - python -m tests.test_trends -v
+  - python -m tests.test_utilities -v
   - python -m tests.test_volatilities -v
   - python -m tests.test_volumes -v
 

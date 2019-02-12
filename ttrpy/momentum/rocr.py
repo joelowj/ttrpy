@@ -14,7 +14,7 @@ def rocr(df, price, rocr, n):
         df (pd.DataFrame): DataFrame which contain the asset information.
         price (string): the column name of the price of the asset.
         rocr (string): the column name for the rate of change ratio.
-        n (int):
+        n (int): the total number of periods.
 
     Returns:
         df (pd.DataFrame): Dataframe with rocr of the asset calculated.

@@ -5,6 +5,7 @@ import pandas as pd
 import unittest
 
 from ttrpy.util.trange import trange
+from ttrpy.util.midpnt import midpnt
 
 
 class TestUtilityIndicators(unittest.TestCase):
@@ -24,6 +25,16 @@ class TestUtilityIndicators(unittest.TestCase):
         self.assertAlmostEqual(self.wdf["tr"][1096], 6.64, places=4)
         self.assertAlmostEqual(self.wdf["tr"][1097], 3.02, places=4)
         self.assertAlmostEqual(self.wdf["tr"][1098], 5.0, places=4)
+
+    def test_midpoint(self):
+        self.wdf = midpnt(self.wdf, "close", "midpoint", 10)
+        self.assertEqual(len(self.wdf["midpoint"]), 1092)
+        self.assertAlmostEqual(self.wdf["midpoint"][0], 120.25, places=4)
+        self.assertAlmostEqual(self.wdf["midpoint"][1], 119.97, places=4)
+        self.assertAlmostEqual(self.wdf["midpoint"][2], 119.97, places=4)
+        self.assertAlmostEqual(self.wdf["midpoint"][1088], 104.56, places=4)
+        self.assertAlmostEqual(self.wdf["midpoint"][1089], 104.56, places=4)
+        self.assertAlmostEqual(self.wdf["midpoint"][1090], 104.56, places=4)
 
     def tearDown(self):
         self.wdf = None
