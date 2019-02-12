@@ -27,9 +27,9 @@ def atr(df, high, low, close, atr, n):
     """
 
     df = trange(df, high, low, close, "true_range")
-    prev_atr = df.loc[1:n, "true_range"].sum() / n
-    df.loc[n, atr] = prev_atr
-    df = df.drop(df.index[:n]).reset_index(drop=True)
+    prev_atr = df.loc[0 : n - 1, "true_range"].sum() / n
+    df.loc[n - 1, atr] = prev_atr
+    df = df.drop(df.index[: n - 1]).reset_index(drop=True)
     df = df.fillna(0)
     avg_trs = [0.0]
     for row in df.loc[1:, ["true_range", atr]].itertuples(index=False):
