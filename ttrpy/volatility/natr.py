@@ -7,7 +7,8 @@ from ttrpy.volatility.atr import atr
 
 def natr(df, high, low, close, natr, n):
     """
-    The Normalized Average True Range (NATR)
+    The Normalized Average True Range (NATR) is a measure of volatility that is
+    directly comparable across assets with different price levels.
 
     Parameters:
         df (pd.DataFrame): DataFrame which contain the asset information.

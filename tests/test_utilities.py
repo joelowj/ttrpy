@@ -7,7 +7,7 @@ import unittest
 from ttrpy.util.trange import trange
 
 
-class TestVolatilityIndicators(unittest.TestCase):
+class TestUtilityIndicators(unittest.TestCase):
     def setUp(self):
         self.wdf = (
             pd.read_csv("examples/weekly_MSFT.csv")

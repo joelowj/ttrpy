@@ -9,6 +9,7 @@ from ttrpy.trend.wma import wma
 from ttrpy.trend.ema import ema
 from ttrpy.trend.dema import dema
 from ttrpy.trend.tema import tema
+from ttrpy.trend.bop import bop
 
 
 class TestTrendIndicators(unittest.TestCase):
@@ -76,6 +77,16 @@ class TestTrendIndicators(unittest.TestCase):
         self.assertAlmostEqual(self.wdf["tema"][1071], 102.5139, places=4)
         self.assertAlmostEqual(self.wdf["tema"][1072], 103.9007, places=4)
         self.assertAlmostEqual(self.wdf["tema"][1073], 103.3348, places=4)
+
+    def test_balance_of_power(self):
+        self.wdf = bop(self.wdf, "open", "high", "low", "close", "bop")
+        self.assertEqual(len(self.wdf["bop"]), 1101)
+        self.assertAlmostEqual(self.wdf["bop"][0], -0.5477, places=4)
+        self.assertAlmostEqual(self.wdf["bop"][1], 0.9655, places=4)
+        self.assertAlmostEqual(self.wdf["bop"][2], 0.7007, places=4)
+        self.assertAlmostEqual(self.wdf["bop"][1097], 0.8750, places=4)
+        self.assertAlmostEqual(self.wdf["bop"][1098], 0.1391, places=4)
+        self.assertAlmostEqual(self.wdf["bop"][1099], -0.8074, places=4)
 
     def tearDown(self):
         self.ddf = None
