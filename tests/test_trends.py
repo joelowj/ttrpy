@@ -11,6 +11,7 @@ from ttrpy.trend.dema import dema
 from ttrpy.trend.tema import tema
 from ttrpy.trend.trix import trix
 from ttrpy.trend.bop import bop
+from ttrpy.trend.aroon import aroon
 
 
 class TestTrendIndicators(unittest.TestCase):
@@ -98,6 +99,22 @@ class TestTrendIndicators(unittest.TestCase):
         self.assertAlmostEqual(self.wdf["bop"][1097], 0.8750, places=4)
         self.assertAlmostEqual(self.wdf["bop"][1098], 0.1391, places=4)
         self.assertAlmostEqual(self.wdf["bop"][1099], -0.8074, places=4)
+
+    def test_aroon(self):
+        self.wdf = aroon(self.wdf, "high", "low", "aroon", 14)
+        self.assertEqual(len(self.wdf["aroon_up"]), 1088)
+        self.assertAlmostEqual(self.wdf["aroon_up"][1], 35.7143, places=4)
+        self.assertAlmostEqual(self.wdf["aroon_dn"][1], 57.1429, places=4)
+        self.assertAlmostEqual(self.wdf["aroon_up"][2], 28.5714, places=4)
+        self.assertAlmostEqual(self.wdf["aroon_dn"][2], 50.0000, places=4)
+        self.assertAlmostEqual(self.wdf["aroon_up"][3], 21.4286, places=4)
+        self.assertAlmostEqual(self.wdf["aroon_dn"][3], 42.8571, places=4)
+        self.assertAlmostEqual(self.wdf["aroon_up"][1084], 57.1429, places=4)
+        self.assertAlmostEqual(self.wdf["aroon_dn"][1084], 78.5714, places=4)
+        self.assertAlmostEqual(self.wdf["aroon_up"][1085], 50.0000, places=4)
+        self.assertAlmostEqual(self.wdf["aroon_dn"][1085], 71.4286, places=4)
+        self.assertAlmostEqual(self.wdf["aroon_up"][1086], 42.8571, places=4)
+        self.assertAlmostEqual(self.wdf["aroon_dn"][1086], 64.2857, places=4)
 
     def tearDown(self):
         self.wdf = None
