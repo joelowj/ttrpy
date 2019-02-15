@@ -10,6 +10,7 @@ from ttrpy.trend.ema import ema
 from ttrpy.trend.dema import dema
 from ttrpy.trend.tema import tema
 from ttrpy.trend.trix import trix
+from ttrpy.trend.trima import trima
 from ttrpy.trend.bop import bop
 from ttrpy.trend.aroon import aroon
 from ttrpy.trend.aroonosc import aroonosc
@@ -90,6 +91,16 @@ class TestTrendIndicators(unittest.TestCase):
         self.assertAlmostEqual(self.wdf["trix"][1069], -0.2203, places=4)
         self.assertAlmostEqual(self.wdf["trix"][1070], -0.2046, places=4)
         self.assertAlmostEqual(self.wdf["trix"][1071], -0.2006, places=4)
+
+    def test_triangular_moving_average(self):
+        self.wdf = trima(self.wdf, "open", "trima", 10)
+        self.assertEqual(len(self.wdf["trima"]), 1092)
+        self.assertAlmostEqual(self.wdf["trima"][0], 134.1987, places=4)
+        self.assertAlmostEqual(self.wdf["trima"][1], 127.8193, places=4)
+        self.assertAlmostEqual(self.wdf["trima"][2], 117.9463, places=4)
+        self.assertAlmostEqual(self.wdf["trima"][1088], 104.7717, places=4)
+        self.assertAlmostEqual(self.wdf["trima"][1089], 103.7377, places=4)
+        self.assertAlmostEqual(self.wdf["trima"][1090], 103.1233, places=4)
 
     def test_balance_of_power(self):
         self.wdf = bop(self.wdf, "open", "high", "low", "close", "bop")
