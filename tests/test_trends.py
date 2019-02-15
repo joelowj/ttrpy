@@ -12,6 +12,7 @@ from ttrpy.trend.tema import tema
 from ttrpy.trend.trix import trix
 from ttrpy.trend.bop import bop
 from ttrpy.trend.aroon import aroon
+from ttrpy.trend.aroonosc import aroonosc
 
 
 class TestTrendIndicators(unittest.TestCase):
@@ -115,6 +116,16 @@ class TestTrendIndicators(unittest.TestCase):
         self.assertAlmostEqual(self.wdf["aroon_dn"][1085], 71.4286, places=4)
         self.assertAlmostEqual(self.wdf["aroon_up"][1086], 42.8571, places=4)
         self.assertAlmostEqual(self.wdf["aroon_dn"][1086], 64.2857, places=4)
+
+    def test_aroon_oscillator(self):
+        self.wdf = aroonosc(self.wdf, "high", "low", "aroonosc", 10)
+        self.assertEqual(len(self.wdf["aroonosc"]), 1092)
+        self.assertAlmostEqual(self.wdf["aroonosc"][0], -30.0, places=4)
+        self.assertAlmostEqual(self.wdf["aroonosc"][1], -30.0, places=4)
+        self.assertAlmostEqual(self.wdf["aroonosc"][2], -30.0, places=4)
+        self.assertAlmostEqual(self.wdf["aroonosc"][1088], -30.0, places=4)
+        self.assertAlmostEqual(self.wdf["aroonosc"][1089], -30.0, places=4)
+        self.assertAlmostEqual(self.wdf["aroonosc"][1090], -30.0, places=4)
 
     def tearDown(self):
         self.wdf = None
