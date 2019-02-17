@@ -12,6 +12,7 @@ from ttrpy.trend.tema import tema
 from ttrpy.trend.trix import trix
 from ttrpy.trend.trima import trima
 from ttrpy.trend.macd import macd
+from ttrpy.trend.macdext import macdext
 from ttrpy.trend.bop import bop
 from ttrpy.trend.aroon import aroon
 from ttrpy.trend.aroonosc import aroonosc
@@ -121,6 +122,25 @@ class TestTrendIndicators(unittest.TestCase):
         self.assertAlmostEqual(self.wdf["macd_hist"][1066], -0.7192, places=4)
         self.assertAlmostEqual(self.wdf["macd"][1066], 0.0110, places=4)
         self.assertAlmostEqual(self.wdf["macd_signal"][1066], 0.7302, places=4)
+
+    def test_moving_average_convergence_divergence_with_controllable_ma(self):
+        self.wdf = macdext(self.wdf, "open", "macd", 12, 26, 9, 0, 0, 0)
+        self.assertEqual(len(self.wdf["macd"]), 1068)
+        self.assertAlmostEqual(self.wdf["macd_hist"][1062], -3.4112, places=4)
+        self.assertAlmostEqual(self.wdf["macd"][1062], -1.4322, places=4)
+        self.assertAlmostEqual(self.wdf["macd_signal"][1062], 1.9790, places=4)
+        self.assertAlmostEqual(self.wdf["macd_hist"][1063], -3.3148, places=4)
+        self.assertAlmostEqual(self.wdf["macd"][1063], -2.0378, places=4)
+        self.assertAlmostEqual(self.wdf["macd_signal"][1063], 1.2770, places=4)
+        self.assertAlmostEqual(self.wdf["macd_hist"][1064], -3.0742, places=4)
+        self.assertAlmostEqual(self.wdf["macd"][1064], -2.5215, places=4)
+        self.assertAlmostEqual(self.wdf["macd_signal"][1064], 0.5527, places=4)
+        self.assertAlmostEqual(self.wdf["macd_hist"][1065], -2.5231, places=4)
+        self.assertAlmostEqual(self.wdf["macd"][1065], -2.6517, places=4)
+        self.assertAlmostEqual(self.wdf["macd_signal"][1065], -0.1287, places=4)
+        self.assertAlmostEqual(self.wdf["macd_hist"][1066], -1.9038, places=4)
+        self.assertAlmostEqual(self.wdf["macd"][1066], -2.6251, places=4)
+        self.assertAlmostEqual(self.wdf["macd_signal"][1066], -0.7213, places=4)
 
     def test_balance_of_power(self):
         self.wdf = bop(self.wdf, "open", "high", "low", "close", "bop")
