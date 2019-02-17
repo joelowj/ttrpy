@@ -11,6 +11,7 @@ from ttrpy.trend.dema import dema
 from ttrpy.trend.tema import tema
 from ttrpy.trend.trix import trix
 from ttrpy.trend.trima import trima
+from ttrpy.trend.macd import macd
 from ttrpy.trend.bop import bop
 from ttrpy.trend.aroon import aroon
 from ttrpy.trend.aroonosc import aroonosc
@@ -101,6 +102,25 @@ class TestTrendIndicators(unittest.TestCase):
         self.assertAlmostEqual(self.wdf["trima"][1088], 104.7717, places=4)
         self.assertAlmostEqual(self.wdf["trima"][1089], 103.7377, places=4)
         self.assertAlmostEqual(self.wdf["trima"][1090], 103.1233, places=4)
+
+    def test_moving_average_convergence_divergence(self):
+        self.wdf = macd(self.wdf, "open", "macd", 12, 26, 9)
+        self.assertEqual(len(self.wdf["macd"]), 1068)
+        self.assertAlmostEqual(self.wdf["macd_hist"][1062], -1.6971, places=4)
+        self.assertAlmostEqual(self.wdf["macd"][1062], 0.2448, places=4)
+        self.assertAlmostEqual(self.wdf["macd_signal"][1062], 1.9419, places=4)
+        self.assertAlmostEqual(self.wdf["macd_hist"][1063], -1.6202, places=4)
+        self.assertAlmostEqual(self.wdf["macd"][1063], -0.0834, places=4)
+        self.assertAlmostEqual(self.wdf["macd_signal"][1063], 1.5368, places=4)
+        self.assertAlmostEqual(self.wdf["macd_hist"][1064], -1.4845, places=4)
+        self.assertAlmostEqual(self.wdf["macd"][1064], -0.3188, places=4)
+        self.assertAlmostEqual(self.wdf["macd_signal"][1064], 1.1657, places=4)
+        self.assertAlmostEqual(self.wdf["macd_hist"][1065], -1.0227, places=4)
+        self.assertAlmostEqual(self.wdf["macd"][1065], -0.1127, places=4)
+        self.assertAlmostEqual(self.wdf["macd_signal"][1065], 0.9100, places=4)
+        self.assertAlmostEqual(self.wdf["macd_hist"][1066], -0.7192, places=4)
+        self.assertAlmostEqual(self.wdf["macd"][1066], 0.0110, places=4)
+        self.assertAlmostEqual(self.wdf["macd_signal"][1066], 0.7302, places=4)
 
     def test_balance_of_power(self):
         self.wdf = bop(self.wdf, "open", "high", "low", "close", "bop")
