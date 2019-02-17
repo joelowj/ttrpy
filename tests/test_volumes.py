@@ -6,6 +6,7 @@ import unittest
 
 from ttrpy.volume.obv import obv
 from ttrpy.volume.ad import ad
+from ttrpy.volume.adosc import adosc
 
 
 class TestVolumeIndicators(unittest.TestCase):
@@ -35,6 +36,16 @@ class TestVolumeIndicators(unittest.TestCase):
         self.assertAlmostEqual(self.wdf["ad"][1097], -863010282.6314, places=4)
         self.assertAlmostEqual(self.wdf["ad"][1098], -803339512.8300, places=4)
         self.assertAlmostEqual(self.wdf["ad"][1099], -947882122.6143, places=4)
+
+    def test_accumulation_distribution_oscillator(self):
+        self.wdf = adosc(self.wdf, "high", "low", "close", "volume", "adosc", 5, 10)
+        self.assertEqual(len(self.wdf["adosc"]), 1092)
+        self.assertAlmostEqual(self.wdf["adosc"][1085], -35440220.0781, places=4)
+        self.assertAlmostEqual(self.wdf["adosc"][1086], -25408687.2433, places=4)
+        self.assertAlmostEqual(self.wdf["adosc"][1087], -19991295.8541, places=4)
+        self.assertAlmostEqual(self.wdf["adosc"][1088], 6415945.8326, places=4)
+        self.assertAlmostEqual(self.wdf["adosc"][1089], 29472076.3690, places=4)
+        self.assertAlmostEqual(self.wdf["adosc"][1090], 18361565.7023, places=4)
 
     def tearDown(self):
         self.wdf = None
