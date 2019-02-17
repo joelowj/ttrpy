@@ -2,7 +2,7 @@
 # License: Apache License, Version 2.0
 
 import pandas as pd
-
+import numpy as np
 
 def ema(df, price, ema, n):
     """
@@ -25,8 +25,15 @@ def ema(df, price, ema, n):
 
     """
 
-    df = df.copy()
-    series = pd.concat([df[:n][price].rolling(window=n).mean(), df[n:][price]])
-    df[ema] = series.ewm(span=n, adjust=False).mean()
+    df = df.copy().reset_index(drop=True)
+    k = 2. / (n + 1)
+    prev_ema = list(df[:n][price].rolling(window=n).mean())[-1]
+    df.loc[n - 1, ema] = prev_ema
+    df.loc[n:, ema] = 0.
+    emas = [0. for i in range(n)]
+    for row in df.loc[n:, [price]].itertuples(index=False):
+        emas.append((k * row[0]) + ((1 - k) * prev_ema))
+        prev_ema = emas[-1]
+    df[ema] += emas
 
     return df
