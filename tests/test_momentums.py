@@ -14,6 +14,7 @@ from ttrpy.momentum.mom import mom
 from ttrpy.momentum.roc import roc
 from ttrpy.momentum.rocr import rocr
 from ttrpy.momentum.ultosc import ultosc
+from ttrpy.momentum.willr import willr
 
 
 class TestMomentumIndicators(unittest.TestCase):
@@ -188,6 +189,16 @@ class TestMomentumIndicators(unittest.TestCase):
         self.assertAlmostEqual(self.wdf["ultosc"][1069], 53.6636, places=4)
         self.assertAlmostEqual(self.wdf["ultosc"][1070], 51.0509, places=4)
         self.assertAlmostEqual(self.wdf["ultosc"][1071], 52.4782, places=4)
+
+    def test_williams_percent_r(self):
+        self.wdf = willr(self.wdf, "high", "low", "close", "willr", 10)
+        self.assertEqual(len(self.wdf["willr"]), 1092)
+        self.assertAlmostEqual(self.wdf["willr"][0], -96.1391, places=4)
+        self.assertAlmostEqual(self.wdf["willr"][1], -96.8321, places=4)
+        self.assertAlmostEqual(self.wdf["willr"][2], -89.4073, places=4)
+        self.assertAlmostEqual(self.wdf["willr"][1088], -29.3422, places=4)
+        self.assertAlmostEqual(self.wdf["willr"][1089], -32.1172, places=4)
+        self.assertAlmostEqual(self.wdf["willr"][1090], -54.6763, places=4)
 
     def tearDown(self):
         self.wdf = None
