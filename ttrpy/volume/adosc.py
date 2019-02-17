@@ -5,6 +5,7 @@ import pandas as pd
 from ttrpy.volume.ad import ad
 from ttrpy.trend.ema import ema
 
+
 def adosc(df, high, low, close, volume, adosc, fast_period, slow_period):
     """
     Marc Chaikin uses the Chaikin Oscillator to monitor the flow of money in and
@@ -31,6 +32,10 @@ def adosc(df, high, low, close, volume, adosc, fast_period, slow_period):
     df = ema(df, adosc + "_ad", adosc + "_ad_slow", slow_period)
     df[adosc] = df[adosc + "_ad_fast"] - df[adosc + "_ad_slow"]
     df = df.dropna().reset_index(drop=True)
-    df.drop([adosc + "_ad", adosc + "_ad_fast", adosc + "_ad_slow"], axis=1, inplace=True)
+    df.drop(
+        [adosc + "_ad", adosc + "_ad_fast", adosc + "_ad_slow"],
+        axis=1,
+        inplace=True,
+    )
 
     return df

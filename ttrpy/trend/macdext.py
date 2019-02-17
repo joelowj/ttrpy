@@ -8,7 +8,18 @@ from ttrpy.trend.wma import wma
 from ttrpy.trend.dema import dema
 from ttrpy.trend.tema import tema
 
-def macdext(df, price, macdext, fast_period, slow_period, signal_period, fast_ma_type=0, slow_ma_type=0, signal_ma_type=0):
+
+def macdext(
+    df,
+    price,
+    macdext,
+    fast_period,
+    slow_period,
+    signal_period,
+    fast_ma_type=0,
+    slow_ma_type=0,
+    signal_ma_type=0,
+):
     """
     The Moving Average Convergence Divergence (MACD) is the difference between
     two Exponential Moving Averages. The Signal line is an Exponential Moving
@@ -43,9 +54,13 @@ def macdext(df, price, macdext, fast_period, slow_period, signal_period, fast_ma
     df = ma_types[fast_ma_type](df, price, macdext + "_fast_ema", fast_period)
     df = ma_types[slow_ma_type](df, price, macdext + "_slow_ema", slow_period)
     df[macdext] = df[macdext + "_fast_ema"] - df[macdext + "_slow_ema"]
-    df = ma_types[signal_ma_type](df[slow_period - 1:], macdext, macdext + "_signal", signal_period)
+    df = ma_types[signal_ma_type](
+        df[slow_period - 1 :], macdext, macdext + "_signal", signal_period
+    )
     df[macdext + "_hist"] = df[macdext] - df[macdext + "_signal"]
-    df.drop([macdext + "_fast_ema", macdext + "_slow_ema"], axis=1, inplace=True)
+    df.drop(
+        [macdext + "_fast_ema", macdext + "_slow_ema"], axis=1, inplace=True
+    )
     df = df.dropna().reset_index(drop=True)
 
     return df

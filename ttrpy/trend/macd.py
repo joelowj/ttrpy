@@ -4,6 +4,7 @@
 import pandas as pd
 from ttrpy.trend.ema import ema
 
+
 def macd(df, price, macd, fast_period, slow_period, signal_period):
     """
     The Moving Average Convergence Divergence (MACD) is the difference between
@@ -34,7 +35,7 @@ def macd(df, price, macd, fast_period, slow_period, signal_period):
     df = ema(df, price, macd + "_fast_ema", fast_period)
     df = ema(df, price, macd + "_slow_ema", slow_period)
     df[macd] = df[macd + "_fast_ema"] - df[macd + "_slow_ema"]
-    df = ema(df[slow_period - 1:], macd, macd + "_signal", signal_period)
+    df = ema(df[slow_period - 1 :], macd, macd + "_signal", signal_period)
     df[macd + "_hist"] = df[macd] - df[macd + "_signal"]
     df.drop([macd + "_fast_ema", macd + "_slow_ema"], axis=1, inplace=True)
     df = df.dropna().reset_index(drop=True)

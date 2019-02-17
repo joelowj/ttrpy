@@ -137,10 +137,14 @@ class TestTrendIndicators(unittest.TestCase):
         self.assertAlmostEqual(self.wdf["macd_signal"][1064], 0.5527, places=4)
         self.assertAlmostEqual(self.wdf["macd_hist"][1065], -2.5231, places=4)
         self.assertAlmostEqual(self.wdf["macd"][1065], -2.6517, places=4)
-        self.assertAlmostEqual(self.wdf["macd_signal"][1065], -0.1287, places=4)
+        self.assertAlmostEqual(
+            self.wdf["macd_signal"][1065], -0.1287, places=4
+        )
         self.assertAlmostEqual(self.wdf["macd_hist"][1066], -1.9038, places=4)
         self.assertAlmostEqual(self.wdf["macd"][1066], -2.6251, places=4)
-        self.assertAlmostEqual(self.wdf["macd_signal"][1066], -0.7213, places=4)
+        self.assertAlmostEqual(
+            self.wdf["macd_signal"][1066], -0.7213, places=4
+        )
 
     def test_balance_of_power(self):
         self.wdf = bop(self.wdf, "open", "high", "low", "close", "bop")
