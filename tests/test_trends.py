@@ -11,6 +11,7 @@ from ttrpy.trend.dema import dema
 from ttrpy.trend.tema import tema
 from ttrpy.trend.trix import trix
 from ttrpy.trend.trima import trima
+from ttrpy.trend.t3 import t3
 from ttrpy.trend.macd import macd
 from ttrpy.trend.macdext import macdext
 from ttrpy.trend.bop import bop
@@ -103,6 +104,16 @@ class TestTrendIndicators(unittest.TestCase):
         self.assertAlmostEqual(self.wdf["trima"][1088], 104.7717, places=4)
         self.assertAlmostEqual(self.wdf["trima"][1089], 103.7377, places=4)
         self.assertAlmostEqual(self.wdf["trima"][1090], 103.1233, places=4)
+
+    def test_t3(self):
+        self.wdf = t3(self.wdf, "open", "t3", 10, 0.7)
+        self.assertEqual(len(self.wdf["t3"]), 1047)
+        self.assertAlmostEqual(self.wdf["t3"][1040], 109.5147, places=4)
+        self.assertAlmostEqual(self.wdf["t3"][1041], 108.6093, places=4)
+        self.assertAlmostEqual(self.wdf["t3"][1042], 107.6079, places=4)
+        self.assertAlmostEqual(self.wdf["t3"][1043], 106.5864, places=4)
+        self.assertAlmostEqual(self.wdf["t3"][1044], 105.7145, places=4)
+        self.assertAlmostEqual(self.wdf["t3"][1045], 105.0484, places=4)
 
     def test_moving_average_convergence_divergence(self):
         self.wdf = macd(self.wdf, "open", "macd", 12, 26, 9)
