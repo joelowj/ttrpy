@@ -12,7 +12,7 @@ from ttrpy.volatility.bbands import bbands
 class TestVolatilityIndicators(unittest.TestCase):
     def setUp(self):
         self.wdf = (
-            pd.read_csv("examples/weekly_MSFT.csv")
+            pd.read_csv("tests/weekly_MSFT.csv")
             .sort_values(by="timestamp")
             .reset_index(drop=True)
         )
