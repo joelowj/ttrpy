@@ -14,6 +14,7 @@ from ttrpy.trend.trima import trima
 from ttrpy.trend.t3 import t3
 from ttrpy.trend.macd import macd
 from ttrpy.trend.macdext import macdext
+from ttrpy.trend.cci import cci
 from ttrpy.trend.bop import bop
 from ttrpy.trend.aroon import aroon
 from ttrpy.trend.aroonosc import aroonosc
@@ -156,6 +157,16 @@ class TestTrendIndicators(unittest.TestCase):
         self.assertAlmostEqual(
             self.wdf["macd_signal"][1066], -0.7213, places=4
         )
+
+    def test_commodity_channel_index(self):
+        self.wdf = cci(self.wdf, "high", "low", "close", "cci", 10)
+        self.assertEqual(len(self.wdf["cci"]), 1092)
+        self.assertAlmostEqual(self.wdf["cci"][0], -113.4523, places=4)
+        self.assertAlmostEqual(self.wdf["cci"][1], -84.9987, places=4)
+        self.assertAlmostEqual(self.wdf["cci"][2], -59.8165, places=4)
+        self.assertAlmostEqual(self.wdf["cci"][1088], 28.8765, places=4)
+        self.assertAlmostEqual(self.wdf["cci"][1089], 54.7324, places=4)
+        self.assertAlmostEqual(self.wdf["cci"][1090], -10.8754, places=4)
 
     def test_balance_of_power(self):
         self.wdf = bop(self.wdf, "open", "high", "low", "close", "bop")
