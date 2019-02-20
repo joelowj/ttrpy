@@ -21,8 +21,7 @@ def rocr(df, price, rocr, n):
 
     """
 
-    df[price + "_n"] = df[price].shift(n)
-    df[rocr] = df[price] / df[price + "_n"]
+    df[rocr] = df[price] / df[price].shift(n)
     df = df.dropna().reset_index(drop=True)
 
     return df

@@ -21,8 +21,8 @@ def roc(df, price, roc, n):
 
     """
 
-    df[price + "_n"] = df[price].shift(n)
-    df[roc] = ((df[price] - df[price + "_n"]) / df[price + "_n"]) * 100
+    price_shift_n = df[price].shift(n)
+    df[roc] = ((df[price] - price_shift_n) / price_shift_n) * 100
     df = df.dropna().reset_index(drop=True)
 
     return df

@@ -47,18 +47,10 @@ def ultosc(
     df = sma(df, ultosc + "_true_range", ultosc + "_b2", time_period_2)
     df = sma(df, ultosc + "_close-tl", ultosc + "_a3", time_period_3)
     df = sma(df, ultosc + "_true_range", ultosc + "_b3", time_period_3)
-    df[ultosc + "_a1/b1"] = df[ultosc + "_a1"] / df[ultosc + "_b1"]
-    df[ultosc + "_a2/b2"] = df[ultosc + "_a2"] / df[ultosc + "_b2"]
-    df[ultosc + "_a3/b3"] = df[ultosc + "_a3"] / df[ultosc + "_b3"]
-    df[ultosc] = (
-        100
-        * (
-            (4 * df[ultosc + "_a1/b1"])
-            + (2 * df[ultosc + "_a2/b2"])
-            + df[ultosc + "_a3/b3"]
-        )
-        / 7.0
-    )
+    a1_b1 = df[ultosc + "_a1"] / df[ultosc + "_b1"]
+    a2_b2 = df[ultosc + "_a2"] / df[ultosc + "_b2"]
+    a3_b3 = df[ultosc + "_a3"] / df[ultosc + "_b3"]
+    df[ultosc] = 100 * ((4 * a1_b1) + (2 * a2_b2) + a3_b3) / 7.0
     df.drop(
         [
             ultosc + "_true_range",
@@ -71,9 +63,6 @@ def ultosc(
             ultosc + "_b2",
             ultosc + "_a3",
             ultosc + "_b3",
-            ultosc + "_a1/b1",
-            ultosc + "_a2/b2",
-            ultosc + "_a3/b3",
         ],
         axis=1,
         inplace=True,

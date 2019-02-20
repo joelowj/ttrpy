@@ -19,8 +19,7 @@ def mom(df, price, mom, n):
 
     """
 
-    df[price + "_n"] = df[price].shift(n)
-    df[mom] = df[price] - df[price + "_n"]
+    df[mom] = df[price] - df[price].shift(n)
     df = df.dropna().reset_index(drop=True)
 
     return df

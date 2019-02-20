@@ -56,13 +56,9 @@ def stoch(
 
     ma_types = {0: sma, 1: ema, 2: wma, 3: dema, 4: tema}
 
-    df["highest_" + high] = df[high].rolling(window=fast_k_n).max()
-    df["lowest_" + low] = df[low].rolling(window=fast_k_n).min()
-    df["fast_%k"] = (
-        (df[close] - df["lowest_" + low])
-        / (df["highest_" + high] - df["lowest_" + low])
-        * 100
-    )
+    hh = df[high].rolling(window=fast_k_n).max()
+    ll = df[low].rolling(window=fast_k_n).min()
+    df["fast_%k"] = (df[close] - ll) / (hh - ll) * 100
     df = ma_types[slow_k_ma_type](
         df[fast_k_n - 1 :], "fast_%k", "slow_%k", slow_k_n
     )
@@ -70,8 +66,6 @@ def stoch(
         df[slow_k_n - 1 :], "slow_%k", "slow_%d", slow_d_n
     )
     df = df.dropna().reset_index(drop=True)
-    df.drop(
-        ["highest_" + high, "lowest_" + low, "fast_%k"], axis=1, inplace=True
-    )
+    df.drop(["fast_%k"], axis=1, inplace=True)
 
     return df

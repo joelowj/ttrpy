@@ -25,37 +25,24 @@ def mfi(df, high, low, close, volume, mfi, n):
 
     """
 
-    df["typical_price"] = (df[high] + df[low] + df[close]) / 3
-    df["money_flow"] = df["typical_price"] * df[volume]
-    df["diff_typical_price"] = df["typical_price"].diff()
-    df.loc[df["diff_typical_price"] > 0, "positive_money_flow"] = 1
-    df.loc[df["diff_typical_price"] <= 0, "negative_money_flow"] = -1
-    df["positive_money_flow"] *= df["money_flow"]
-    df["negative_money_flow"] *= df["money_flow"]
+    typical_price = (df[high] + df[low] + df[close]) / 3
+    money_flow = typical_price * df[volume]
+    typical_price_diff = typical_price.diff()
+    df.loc[typical_price_diff > 0, "positive_money_flow"] = 1
+    df.loc[typical_price_diff <= 0, "negative_money_flow"] = -1
+    df["positive_money_flow"] *= money_flow
+    df["negative_money_flow"] *= money_flow
     df = df.fillna(0)
-    df["n_positive_money_flow"] = (
+    n_pos_money_flow = (
         df.loc[1:, "positive_money_flow"].rolling(window=n).sum()
     )
-    df["n_negative_money_flow"] = (
+    n_neg_money_flow = (
         df.loc[1:, "negative_money_flow"].rolling(window=n).sum()
     )
-    df[mfi + "_ratio"] = (
-        df["n_positive_money_flow"] / -df["n_negative_money_flow"]
-    )
-    df[mfi] = 100 - (100 / (1 + df[mfi + "_ratio"]))
+    mfi_ratio = n_pos_money_flow / -n_neg_money_flow
+    df[mfi] = 100 - (100 / (1 + mfi_ratio))
     df.drop(
-        [
-            "typical_price",
-            "money_flow",
-            "diff_typical_price",
-            "positive_money_flow",
-            "negative_money_flow",
-            "n_positive_money_flow",
-            "n_negative_money_flow",
-            mfi + "_ratio",
-        ],
-        axis=1,
-        inplace=True,
+        ["positive_money_flow", "negative_money_flow"], axis=1, inplace=True
     )
     df = df.dropna().reset_index(drop=True)
 
