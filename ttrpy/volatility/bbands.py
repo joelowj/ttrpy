@@ -32,15 +32,14 @@ def bbands(df, price, bbands, n_bdev_up, n_bdev_dn, ma_type, n):
 
     ma_types = {0: sma, 1: ema, 2: wma, 3: dema, 4: tema}
 
-    df[price + "_n_days_std"] = df[price].rolling(window=n).std(ddof=0)
+    n_days_std = df[price].rolling(window=n).std(ddof=0)
     df = ma_types[ma_type](df, price, bbands + "_middle_band", n)
     df[bbands + "_upper_band"] = df[bbands + "_middle_band"] + (
-        df[price + "_n_days_std"] * n_bdev_up
+        n_days_std * n_bdev_up
     )
     df[bbands + "_lower_band"] = df[bbands + "_middle_band"] - (
-        df[price + "_n_days_std"] * n_bdev_dn
+        n_days_std * n_bdev_dn
     )
-    del df[price + "_n_days_std"]
     df = df.dropna().reset_index(drop=True)
 
     return df
