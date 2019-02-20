@@ -26,12 +26,12 @@ def trange(df, high, low, close, tr):
 
     """
 
-    df["previous_close"] = df[close].shift(1)
+    prev_close = df[close].shift(1)
     df["h-l"] = df[high] - df[low]
-    df["h-pc"] = df[high] - df["previous_close"]
-    df["pc-l"] = df["previous_close"] - df[low]
+    df["h-pc"] = df[high] - prev_close
+    df["pc-l"] = prev_close - df[low]
     df = df.dropna().reset_index(drop=True)
     df[tr] = df[["h-l", "h-pc", "pc-l"]].max(axis=1)
-    df.drop(["h-l", "h-pc", "pc-l", "previous_close"], axis=1, inplace=True)
+    df.drop(["h-l", "h-pc", "pc-l"], axis=1, inplace=True)
 
     return df

@@ -21,16 +21,9 @@ def midpri(df, high, low, midpri, n):
 
     """
 
-    df[midpri + "_highest_high"] = df[high].rolling(window=n).max()
-    df[midpri + "_lowest_low"] = df[low].rolling(window=n).min()
-    df[midpri] = (
-        df[midpri + "_highest_high"] + df[midpri + "_lowest_low"]
-    ) / 2
-    df.drop(
-        [midpri + "_highest_high", midpri + "_lowest_low"],
-        axis=1,
-        inplace=True,
-    )
+    midpri_hh = df[high].rolling(window=n).max()
+    midpri_ll = df[low].rolling(window=n).min()
+    df[midpri] = (midpri_hh + midpri_ll) / 2
     df = df.dropna().reset_index(drop=True)
 
     return df
