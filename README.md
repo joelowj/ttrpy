@@ -12,8 +12,6 @@ To install the current release:
 pip install ttrpy
 ```
 
-# Getting Started
-
 # Contribution Guidelines
 
 **If you want to contribute to ttrpy, be sure to review the [contribution
