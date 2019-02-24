@@ -30,13 +30,13 @@ def cci(df, high, low, close, cci, n, c=0.015):
 
     df[cci + "_tp"] = (df[high] + df[low] + df[close]) / 3.0
     df = sma(df, cci + "_tp", cci + "_atp", n)
-    df[cci + "_mdev"] = (
+    mdev = (
         df[cci + "_tp"]
         .rolling(n)
         .apply(lambda x: np.fabs(x - x.mean()).mean(), raw=True)
     )
-    df[cci] = (df[cci + "_tp"] - df[cci + "_atp"]) / (c * df[cci + "_mdev"])
-    df.drop([cci + "_tp", cci + "_atp", cci + "_mdev"], axis=1, inplace=True)
+    df[cci] = (df[cci + "_tp"] - df[cci + "_atp"]) / (c * mdev)
+    df.drop([cci + "_tp", cci + "_atp"], axis=1, inplace=True)
     df = df.dropna().reset_index(drop=True)
 
     return df
