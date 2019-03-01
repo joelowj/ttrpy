@@ -9,7 +9,7 @@ Technical Trading Rule Python is an open source library for popular technical an
 To install the current release:
 
 ```
-pip install ttrpy
+$ pip install ttrpy
 ```
 
 # Contribution Guidelines
@@ -17,3 +17,11 @@ pip install ttrpy
 **If you want to contribute to ttrpy, be sure to review the [contribution
 guidelines](CONTRIBUTING.md). This project adheres to ttrpy's
 [code of conduct](CODE_OF_CONDUCT.md). By participating, you are expected to uphold this code.**
+
+To get started started,
+
+```
+$ pip install virtualenv
+$ source venv/bin/activate
+$ pip install -r requirements.txt
+```
