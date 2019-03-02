@@ -15,11 +15,10 @@ install:
   - pip install -r requirements.txt
 
 script:
-  - python -m tests.test_momentums -v
-  - python -m tests.test_trends -v
-  - python -m tests.test_utilities -v
-  - python -m tests.test_volatilities -v
-  - python -m tests.test_volumes -v
+  - py.test --cov-report term --cov=tests/
+
+env:
+  - CODECOV_TOKEN
 
 branches:
   only:
