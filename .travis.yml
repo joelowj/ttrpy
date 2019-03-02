@@ -17,8 +17,8 @@ install:
 script:
   - py.test --cov-report term --cov=tests/
 
-env:
-  - CODECOV_TOKEN
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
 
 branches:
   only:
