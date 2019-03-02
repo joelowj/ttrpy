@@ -15,7 +15,12 @@ install:
   - pip install -r requirements.txt
 
 script:
-  - py.test --cov-report term --cov=tests/
+  - python -m tests.test_momentums
+  - python -m tests.test_trends
+  - python -m tests.test_utilities
+  - python -m tests.test_volatilities
+  - python -m tests.test_volumes
+  - py.test --cov-report term --cov=ttrpy/
 
 after_success:
   - bash <(curl -s https://codecov.io/bash)

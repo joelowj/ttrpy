@@ -1,6 +1,6 @@
 # ttrpy
 
-[![Build Status](https://travis-ci.com/joelowj/ttrpy.svg?token=zM8uDnAP2GXz8Hagm4hw&branch=master)](https://travis-ci.com/joelowj/ttrpy)
+[![Build Status](https://travis-ci.com/joelowj/ttrpy.svg?token=zM8uDnAP2GXz8Hagm4hw&branch=master)](https://travis-ci.com/joelowj/ttrpy) [![codecov](https://codecov.io/gh/joelowj/ttrpy/branch/master/graph/badge.svg)](https://codecov.io/gh/joelowj/ttrpy)
 
 Technical Trading Rule Python is an open source library for popular technical analysis function for financial time series data.
 
