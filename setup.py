@@ -1,9 +1,9 @@
-from distutils.core import setup
+from setuptools import setup, find_packages
 
 setup(
     name="ttrpy",
-    packages=["ttrpy"],
-    version="0.1.0",
+    packages=find_packages(),
+    version="0.1.1",
     license="Apache License 2.0",
     description="Technical analysis and other functions to construct technical trading rules with Python",
     author="joelowj",
