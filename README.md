@@ -17,21 +17,23 @@ $ pip install ttrpy
 ```python
 >>> import pandas as pd
 >>> import ttrpy.trend.sma import sma
-
-# read your own price data into pandas either from .csv or API
 >>> df = pd.read_csv("weekly_MSFT.csv").sort_values(by="timestamp").reset_index(drop=True)
-
 >>> df.tail(3)
+```
 
+```
       timestamp    open    high     low   close   volume
 1098 2019-01-25  106.75   107.88    ...    ...     ...
 1099 2019-02-01  106.26   106.48    ...    ...     ...
 1100 2019-02-07  102.87   107.27    ...    ...     ...
+```
 
+```python
 >>> df = sma(df, "close", "sma", 200)
-
 >>> df.tail(3)
+```
 
+```
       timestamp    open    high     low   close   volume    sma
 1098 2019-01-25  106.75   107.88    ...    ...     ...    71.080175
 1099 2019-02-01  106.26   106.48    ...    ...     ...    71.392625
