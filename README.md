@@ -1,6 +1,9 @@
 # ttrpy
 
+[![forthebadge](https://forthebadge.com/images/badges/made-with-python.svg)](https://forthebadge.com)
+
 [![Build Status](https://travis-ci.com/joelowj/ttrpy.svg?token=zM8uDnAP2GXz8Hagm4hw&branch=master)](https://travis-ci.com/joelowj/ttrpy) [![codecov](https://codecov.io/gh/joelowj/ttrpy/branch/master/graph/badge.svg)](https://codecov.io/gh/joelowj/ttrpy)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=shields)](http://makeapullrequest.com)
 
 Technical Trading Rule Python is an open source library for popular technical analysis function for financial time series data.
 
@@ -12,11 +15,11 @@ To install the current release:
 $ pip install ttrpy
 ```
 
-## Usage
+## Usage Overview
 
+Load historical stock data into `Pandas` from existing csv file or directly from the web.
 ```python
 >>> import pandas as pd
->>> import ttrpy.trend.sma import sma
 >>> df = pd.read_csv("weekly_MSFT.csv").sort_values(by="timestamp").reset_index(drop=True)
 >>> df.tail(3)
 ```
@@ -28,7 +31,10 @@ $ pip install ttrpy
 1100 2019-02-07  102.87   107.27    ...    ...     ...
 ```
 
+Let's say we are interested in the overall long-term trend for `MSFT`, we can use the simple moving average function from the trend package.
+
 ```python
+>>> from ttrpy.trend.sma import sma
 >>> df = sma(df, "close", "sma", 200)
 >>> df.tail(3)
 ```
@@ -55,6 +61,19 @@ $ pip install virtualenv
 $ source venv/bin/activate
 $ pip install -r requirements.txt
 ```
+
+If you find a bug, kindly open an issue [here](https://github.com/joelowj/ttrpy/issues/new).
+
+If you would like to request a new feature, feel free to do so by opening an issue [here](https://github.com/joelowj/ttrpy/issues/new).
+
+To fix a bug or enhance an existing module, follow these steps:
+- Fork the repository
+- Create a new branch (`git checkout - b improve-feature`)
+- Make the appropriate changes in the files
+- Add changes to reflect the changes made
+- Commit your changes (`git commit -m 'Improve feature'`)
+- Push to the branch (`git push origin improve-feature`)
+- Create a Pull Request
 
 ## Versioning
 We use [SemVer](https://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/joelowj/ttrpy/tags)
