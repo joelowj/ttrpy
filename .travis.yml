@@ -16,10 +16,6 @@ cache:
 jobs:
   include:
     - stage: test
-      python: '3.5'
-      script:
-        - make test
-    - stage: test
       python: '3.6'
       script:
         - make test
@@ -32,3 +28,6 @@ jobs:
       python: '3.6'
       script:
         - make coverage
+
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
