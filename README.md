@@ -1,7 +1,5 @@
 # ttrpy
 
-[![forthebadge](https://forthebadge.com/images/badges/made-with-python.svg)](https://forthebadge.com)
-
 [![Build Status](https://travis-ci.com/joelowj/ttrpy.svg?token=zM8uDnAP2GXz8Hagm4hw&branch=master)](https://travis-ci.com/joelowj/ttrpy) [![codecov](https://codecov.io/gh/joelowj/ttrpy/branch/master/graph/badge.svg)](https://codecov.io/gh/joelowj/ttrpy)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=shields)](http://makeapullrequest.com)
 
@@ -57,9 +55,8 @@ guidelines](CONTRIBUTING.md). This project adheres to ttrpy's
 To get the local repository set up for development,
 
 ```
-$ pip install virtualenv
-$ source venv/bin/activate
-$ pip install -r requirements.txt
+$ pip install pipenv
+$ pip install --dev
 ```
 
 If you find a bug, kindly open an issue [here](https://github.com/joelowj/ttrpy/issues/new).
@@ -68,11 +65,11 @@ If you would like to request a new feature, feel free to do so by opening an iss
 
 To fix a bug or enhance an existing module, follow these steps:
 - Fork the repository
-- Create a new branch (`git checkout - b improve-feature`)
+- Create a new branch (`git checkout - b branch-name`)
 - Make the appropriate changes in the files
 - Add changes to reflect the changes made
-- Commit your changes (`git commit -m 'Improve feature'`)
-- Push to the branch (`git push origin improve-feature`)
+- Commit your changes (`git commit -m 'commit message'`)
+- Push to the branch (`git push origin branch-name`)
 - Create a Pull Request
 
 ## Versioning
