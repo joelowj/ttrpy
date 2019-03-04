@@ -10,9 +10,6 @@ before_install:
 
 install: "make"
 
-cache:
-  - pip
-
 jobs:
   include:
     - stage: test
