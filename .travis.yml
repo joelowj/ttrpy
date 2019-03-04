@@ -1,8 +1,5 @@
 language: python
 
-python:
-  - "3.6"
-
 notifications:
   email: false
 
@@ -11,16 +8,27 @@ before_install:
   - sudo apt-get -y install python-pip
   - pip install --upgrade pip
 
-install:
-  - pip install pipenv
+install: "make"
 
-script:
-  - python -m tests.test_momentums
-  - python -m tests.test_trends
-  - python -m tests.test_utilities
-  - python -m tests.test_volatilities
-  - python -m tests.test_volumes
-  - py.test --cov-report term --cov=ttrpy/
+cache:
+  - pip
 
-after_success:
-  - bash <(curl -s https://codecov.io/bash)
+jobs:
+  include:
+    - stage: test
+      python: '3.5'
+      script:
+        - make test
+    - stage: test
+      python: '3.6'
+      script:
+        - make test
+    - stage: test
+      python: '3.7'
+      dist: xenial
+      script:
+        - make test
+    - stage: coverage
+      python: '3.6'
+      script:
+        - make coverage
