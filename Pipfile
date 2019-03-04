@@ -6,6 +6,7 @@ verify_ssl = true
 [dev-packages]
 pre-commit = "*"
 pytest = "*"
+pytest-cov = "*"
 
 [packages]
 pandas = "*"
