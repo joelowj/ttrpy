@@ -97,7 +97,7 @@ class TestTrendIndicators(unittest.TestCase):
         self.assertAlmostEqual(self.wdf["trix"][1070], -0.2046, places=4)
         self.assertAlmostEqual(self.wdf["trix"][1071], -0.2006, places=4)
 
-    def test_triangular_moving_average(self):
+    def test_triangular_moving_average_even(self):
         self.wdf = trima(self.wdf, "open", "trima", 10)
         self.assertEqual(len(self.wdf["trima"]), 1092)
         self.assertAlmostEqual(self.wdf["trima"][0], 134.1987, places=4)
@@ -106,6 +106,16 @@ class TestTrendIndicators(unittest.TestCase):
         self.assertAlmostEqual(self.wdf["trima"][1088], 104.7717, places=4)
         self.assertAlmostEqual(self.wdf["trima"][1089], 103.7377, places=4)
         self.assertAlmostEqual(self.wdf["trima"][1090], 103.1233, places=4)
+
+    def test_triangular_moving_average_odd(self):
+        self.wdf = trima(self.wdf, "open", "trima", 11)
+        self.assertEqual(len(self.wdf["trima"]), 1091)
+        self.assertAlmostEqual(self.wdf["trima"][0], 129.8600, places=4)
+        self.assertAlmostEqual(self.wdf["trima"][1], 122.3894, places=4)
+        self.assertAlmostEqual(self.wdf["trima"][2], 112.2053, places=4)
+        self.assertAlmostEqual(self.wdf["trima"][1088], 104.3839, places=4)
+        self.assertAlmostEqual(self.wdf["trima"][1089], 103.5458, places=4)
+        self.assertAlmostEqual(self.wdf["trima"][1090], 103.1781, places=4)
 
     def test_t3(self):
         self.wdf = t3(self.wdf, "open", "t3", 10, 0.7)
