@@ -1,6 +1,4 @@
 from ttrpy.trend.sma import sma  
-import pandas as pd 
-
 
 #compares 2 smas
 def smacompare(df,price,sma1,sma2,n1,n2):
